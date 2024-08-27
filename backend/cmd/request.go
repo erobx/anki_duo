@@ -1,54 +1,50 @@
-package main
+package cmd
 
 import (
 	"encoding/json"
 	"log"
 )
 
-type Request struct {
+type Request interface {
+	Send() []byte
+}
+
+type BasicReq struct {
 	Action  string `json:"action"`
 	Version int    `json:"version"`
 }
 
-type ParamRequest struct {
+type ParamReq struct {
 	Action  string `json:"action"`
 	Version int    `json:"version"`
 	Params  any    `json:"params"`
 }
 
-func NewRequest(action string) Request {
-	return Request{
+func NewRequest(action string) BasicReq {
+	return BasicReq{
 		Action:  action,
 		Version: 6,
 	}
 }
 
-func NewParamRequest(action string, params any) ParamRequest {
-	return ParamRequest{
+func NewParamRequest(action string, params any) ParamReq {
+	return ParamReq{
 		Action:  action,
 		Version: 6,
 		Params:  params,
 	}
 }
 
-func (r Request) Marshal() ([]byte, error) {
-	return json.Marshal(r)
-}
-
-func (r ParamRequest) Marshal() ([]byte, error) {
-	return json.Marshal(r)
-}
-
-func (req Request) Call() Result {
-	data, err := req.Marshal()
+func (req BasicReq) Send() []byte {
+	data, err := json.Marshal(req)
 	if err != nil {
 		log.Fatal(err)
 	}
 	return SendRequest(data)
 }
 
-func (req ParamRequest) Call() Result {
-	data, err := req.Marshal()
+func (req ParamReq) Send() []byte {
+	data, err := json.Marshal(req)
 	if err != nil {
 		log.Fatal(err)
 	}

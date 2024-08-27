@@ -1,15 +1,18 @@
-package main
+package cmd
 
 import (
 	"bytes"
-	"encoding/json"
 	"io"
 	"log"
 	"net/http"
 )
 
-func SendRequest(data []byte) Result {
-	var r Result
+const (
+	url     = "http://localhost:8765"
+	content = "application/json"
+)
+
+func SendRequest(data []byte) []byte {
 	reqBody := bytes.NewBuffer(data)
 	res, err := http.Post(url, content, reqBody)
 	if err != nil {
@@ -21,10 +24,5 @@ func SendRequest(data []byte) Result {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	err = json.Unmarshal(body, &r)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return r
+	return body
 }
