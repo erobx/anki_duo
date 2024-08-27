@@ -1,6 +1,3 @@
-[submodule "backend/duolingo"]
-	path = backend/duolingo
-	url = https://gitlab.com/JASchilz/duolingo.git
 [submodule "duolingo"]
 	path = duolingo
 	url = https://gitlab.com/JASchilz/duolingo.git
