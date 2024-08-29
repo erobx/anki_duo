@@ -1,12 +1,35 @@
 #!/usr/local/bin/python3
 import duo
-import words
+import json
+
+def extract_words() -> dict:
+    print("Getting vocab from json...")
+    words = {}
+    with open('vocabulary.json', 'r') as f:
+        data = json.load(f)
+        for i in data:
+            words[i['text']] = i['translations']
+
+    return words
+
+
+def write_to_file(file_name: str, words: dict):
+    print("Writing to Anki import file...")
+    with open(file_name, 'w') as f:
+        for k,v in words.items():
+            f.write(k)
+            f.write(";")
+            for i in range(len(v)):
+                f.write(v[i])
+                if i != len(v)-1:
+                    f.write(", ")
+            f.write("\n")
+
 
 def main():
     duo.vocab_dump()
-    print("Writing words to Anki plaintext file...")
-    w = words.extract_words()
-    words.write_to_file(w)
+    w = extract_words()
+    write_to_file("vocab.txt", w)
     print("Done!")
 
 

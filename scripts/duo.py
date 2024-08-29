@@ -12,7 +12,7 @@ def vocab_dump():
     JWT = os.getenv('JWT')
     print("Logging into Duolingo...")
     lingo = duolingo.Duolingo(jwt=JWT)
-    print("Getting vocab from Duolingo...")
+    print("Getting vocab...")
     vocab = lingo.get_vocabulary('es')
     with open('vocabulary.json', 'w') as f:
         print("Dumping json...")
