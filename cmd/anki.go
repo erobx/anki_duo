@@ -78,7 +78,7 @@ func (a Anki) CreateDeck(name string) int {
 */
 func (a Anki) ImportFile(path string) {
 	params := map[string]string{
-		"path": path,
+		//"path": path,
 	}
 	req := NewParamRequest("guiImportFile", params)
 	body := req.Send()

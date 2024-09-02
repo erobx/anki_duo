@@ -1,9 +1,9 @@
 #!/usr/local/bin/python3
+import sys
 import duo
 import json
 
 def extract_words() -> dict:
-    print("Getting vocab from json...")
     words = {}
     with open('vocabulary.json', 'r') as f:
         data = json.load(f)
@@ -27,9 +27,11 @@ def write_to_file(file_name: str, words: dict):
 
 
 def main():
-    duo.vocab_dump()
+    JWT = sys.argv[1]
+    file_name = sys.argv[2]
+    duo.vocab_dump(JWT)
     w = extract_words()
-    write_to_file("vocab.txt", w)
+    write_to_file(file_name, w)
     print("Done!")
 
 

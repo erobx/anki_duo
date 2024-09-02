@@ -7,7 +7,6 @@ import (
 	"os/exec"
 
 	"github.com/erobx/anki_duo/cmd"
-	"github.com/joho/godotenv"
 )
 
 type Cmdr struct {
@@ -20,26 +19,30 @@ func NewCmdr(args []string) Cmdr {
 	}
 }
 
+// go run . JWT file_name
 func main() {
-	args := []string{"scripts/__main__.py"}
+	if len(os.Args[1:]) != 2 {
+		log.Fatal("Please provide the correct arguments")
+	}
+	jwt := os.Args[1]
+	file_name := os.Args[2]
+	args := []string{"scripts/__main__.py", jwt, file_name}
 	c := NewCmdr(args)
-	//c.runDuo()
-	fmt.Println("Importing to Anki")
-	c.runAnki()
+	c.runDuo()
+	c.runAnki(file_name)
 }
 
 func (c *Cmdr) runDuo() {
 	c.cmd.Stdout = os.Stdout
 	c.cmd.Stderr = os.Stderr
-	log.Println(c.cmd.Run())
+	err := c.cmd.Run()
+	if err != nil {
+		log.Fatal("Could not get vocab from Duolingo")
+	}
 }
 
-func (c *Cmdr) runAnki() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	path := os.Getenv("IMPORT_PATH")
+func (c *Cmdr) runAnki(file_name string) {
+	fmt.Println("Importing to Anki")
 	anki := cmd.NewAnki()
-	anki.ImportFile(path)
+	anki.ImportFile(file_name)
 }

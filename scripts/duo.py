@@ -1,15 +1,11 @@
 import sys
-import os
 import json
-from dotenv import load_dotenv
 
 # add package to system path
 sys.path.insert(0,'/home/erob/Documents/projects/anki_duo/duolingo/')
 from duolingo import duolingo
 
-def vocab_dump():
-    load_dotenv()
-    JWT = os.getenv('JWT')
+def vocab_dump(JWT: str):
     print("Logging into Duolingo...")
     lingo = duolingo.Duolingo(jwt=JWT)
     print("Getting vocab...")
