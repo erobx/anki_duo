@@ -76,7 +76,7 @@ func (a Anki) CreateDeck(name string) int {
 /*
 {"result": null, "error": null}
 */
-func (a Anki) ImportFile(path string) {
+func (a Anki) ImportFile() {
 	params := map[string]string{
 		//"path": path,
 	}

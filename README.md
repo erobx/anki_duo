@@ -16,7 +16,6 @@ Run the Makefile to bulid the project, then run the exe with the required argume
 
 ```bash
 make
-./anki-duo {JWT} {file_name}
 ```
 
 

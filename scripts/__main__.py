@@ -28,10 +28,9 @@ def write_to_file(file_name: str, words: dict):
 
 def main():
     JWT = sys.argv[1]
-    file_name = sys.argv[2]
     duo.vocab_dump(JWT)
     w = extract_words()
-    write_to_file(file_name, w)
+    write_to_file("vocab.txt", w)
     print("Done!")
 
 

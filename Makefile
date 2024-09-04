@@ -1,3 +1,6 @@
+run: build
+	@./bin/anki-duo
+
 build:
-	@go build -o anki-duo main.go
+	@go build -o bin/anki-duo main.go
 
