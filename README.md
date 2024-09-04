@@ -12,10 +12,11 @@ You also need the [Anki client](https://apps.ankiweb.net/) installed on your sys
 
 ## Running the project
 
-Run the Makefile to bulid the project, then run the exe with the required arguments.
+Make sure Anki is running before running the Makefile.
+
+Run the Makefile to bulid the project, then provide your JWT.
 
 ```bash
 make
 ```
-
 
