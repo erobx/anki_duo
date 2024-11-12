@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 
 	"github.com/erobx/anki_duo/cmd"
 	"github.com/erobx/golingo/duolingo"
@@ -18,10 +17,9 @@ const (
 )
 
 type Cmdr struct {
-	cmd *exec.Cmd
 }
 
-func NewCmdr(args []string) Cmdr {
+func NewCmdr() Cmdr {
 	return Cmdr{}
 }
 
@@ -30,15 +28,12 @@ func main() {
 	//fmt.Print("Enter your JWT from Duolingo: ")
 	//fmt.Scan(&jwt)
 
-	jwt := os.Getenv("DUO_JWT")
-
-	duo := createConn(jwt)
-	vocab := duo.GetVocab(jwt, abbr)
-	dumpVocab(vocab, "vocab.json")
+	//duo := createConn(jwt)
+	//vocab := duo.GetVocab(abbr)
+	//dumpVocab(vocab, "vocab.json")
 
 	vocabState := cmd.NewVocabState()
 	vocabState.ReadFile("vocab.json")
-	fmt.Println(vocabState.Total)
 }
 
 func (c *Cmdr) runAnki() {
@@ -52,7 +47,6 @@ func createConn(token string) *duolingo.Duolingo {
 	if err != nil {
 		os.Exit(1)
 	}
-
 	username := os.Getenv("DUO_USERNAME")
 
 	duo := duolingo.NewDuolingo(username, token, baseUrl, abbr)
