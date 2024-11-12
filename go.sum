@@ -1,2 +1,4 @@
+github.com/erobx/golingo v0.0.0-20241111221612-edebfb440252 h1:nPFSZ/MnYuneXTJrb2LVHRisHl7OMs1G2yKaVIegaZA=
+github.com/erobx/golingo v0.0.0-20241111221612-edebfb440252/go.mod h1:enHCsqXiQgrq9oee+1ZZij0Ccl/YlSUGbB83wIPsE1U=
 github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
 github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
