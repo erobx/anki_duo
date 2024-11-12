@@ -1,4 +1,4 @@
-package cmd
+package vocab
 
 import (
 	"encoding/json"
@@ -31,6 +31,18 @@ func (vs *VocabState) ReadFile(name string) {
 	n := len(data) - 2
 	data = data[2:n]
 	vs.extractWords(data)
+}
+
+func (vs *VocabState) DumpVocab(vocab []interface{}, file string) {
+	data, err := json.Marshal(vocab)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = os.WriteFile(file, data, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // format vocab for Anki import

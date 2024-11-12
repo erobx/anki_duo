@@ -1,8 +1,10 @@
-package cmd
+package anki
 
 import (
 	"encoding/json"
 	"log"
+
+	"github.com/erobx/anki_duo/internal/utils"
 )
 
 type Anki struct {
@@ -31,7 +33,7 @@ func (a Anki) CheckError() {
 func (a Anki) GetDeckNames() []string {
 	var names []string
 
-	req := NewRequest("deckNames")
+	req := utils.NewRequest("deckNames")
 	body := req.Send()
 
 	err := json.Unmarshal(body, &a.objMap)
@@ -58,7 +60,7 @@ func (a Anki) CreateDeck(name string) int {
 	params := map[string]string{
 		"deck": name,
 	}
-	req := NewParamRequest("createDeck", params)
+	req := utils.NewParamRequest("createDeck", params)
 	body := req.Send()
 
 	err := json.Unmarshal(body, &a.objMap)
@@ -83,7 +85,7 @@ func (a Anki) ImportFile() {
 	params := map[string]string{
 		//"path": path,
 	}
-	req := NewParamRequest("guiImportFile", params)
+	req := utils.NewParamRequest("guiImportFile", params)
 	body := req.Send()
 
 	err := json.Unmarshal(body, &a.objMap)
