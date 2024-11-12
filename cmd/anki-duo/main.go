@@ -36,8 +36,8 @@ func main() {
 	vocabState.ReadFile("data/vocab.json")
 	vocabState.ToAnki("data/import.txt")
 
-	//cmdr := NewCmdr()
-	//cmdr.runAnki()
+	cmdr := NewCmdr()
+	cmdr.runAnki()
 }
 
 func (c *Cmdr) runAnki() {
