@@ -40,6 +40,7 @@ func (req BasicReq) Send() []byte {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	return SendRequest(data)
 }
 
@@ -48,5 +49,6 @@ func (req ParamReq) Send() []byte {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	return SendRequest(data)
 }

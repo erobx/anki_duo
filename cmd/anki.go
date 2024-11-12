@@ -19,6 +19,7 @@ func (a Anki) CheckError() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	if len(e) != 0 {
 		log.Fatal(e)
 	}
@@ -45,6 +46,7 @@ func (a Anki) GetDeckNames() []string {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	return names
 }
 
@@ -70,6 +72,7 @@ func (a Anki) CreateDeck(name string) int {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	return deckId
 }
 
@@ -95,6 +98,7 @@ func (a Anki) ImportFile() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	if len(r) != 0 {
 		log.Fatal(r)
 	}

@@ -21,14 +21,37 @@ func NewVocabState() *VocabState {
 	return &VocabState{}
 }
 
-func (vs *VocabState) ReadFile(file string) {
-	data, err := os.ReadFile(file)
+// read vocab from Duo api
+func (vs *VocabState) ReadFile(name string) {
+	data, err := os.ReadFile(name)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	n := len(data) - 2
 	data = data[2:n]
 	vs.extractWords(data)
+}
+
+// format vocab for Anki import
+// word;translation, translation, translation
+func (vs *VocabState) ToAnki(name string) {
+	file, err := os.OpenFile(name, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	for _, w := range vs.Words {
+		file.WriteString(w.Text + ";")
+		for i, t := range w.Translations {
+			if i == len(w.Translations)-1 {
+				file.WriteString(t + "\n")
+			} else {
+				file.WriteString(t + ", ")
+			}
+		}
+	}
 }
 
 func (vs *VocabState) extractWords(data []byte) {
@@ -55,6 +78,7 @@ func (vs *VocabState) addWord(w string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	vs.Words = append(vs.Words, word)
 	vs.Total += 1
 }

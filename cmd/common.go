@@ -15,6 +15,7 @@ const (
 func SendRequest(data []byte) []byte {
 	reqBody := bytes.NewBuffer(data)
 	res, err := http.Post(url, content, reqBody)
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -24,5 +25,6 @@ func SendRequest(data []byte) []byte {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	return body
 }

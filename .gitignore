@@ -1,6 +1,5 @@
 .env
 *.txt
 *.json
-__pycache__
 bin/*
 .editorconfig

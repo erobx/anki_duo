@@ -24,16 +24,20 @@ func NewCmdr() Cmdr {
 }
 
 func main() {
-	//var jwt string
-	//fmt.Print("Enter your JWT from Duolingo: ")
-	//fmt.Scan(&jwt)
+	var jwt string
+	fmt.Print("Enter your JWT from Duolingo: ")
+	fmt.Scan(&jwt)
 
-	//duo := createConn(jwt)
-	//vocab := duo.GetVocab(abbr)
-	//dumpVocab(vocab, "vocab.json")
+	duo := createConn(jwt)
+	vocab := duo.GetVocab(abbr)
+	dumpVocab(vocab, "data/vocab.json")
 
 	vocabState := cmd.NewVocabState()
-	vocabState.ReadFile("vocab.json")
+	vocabState.ReadFile("data/vocab.json")
+	vocabState.ToAnki("data/import.txt")
+
+	//cmdr := NewCmdr()
+	//cmdr.runAnki()
 }
 
 func (c *Cmdr) runAnki() {
@@ -47,6 +51,7 @@ func createConn(token string) *duolingo.Duolingo {
 	if err != nil {
 		os.Exit(1)
 	}
+
 	username := os.Getenv("DUO_USERNAME")
 
 	duo := duolingo.NewDuolingo(username, token, baseUrl, abbr)
