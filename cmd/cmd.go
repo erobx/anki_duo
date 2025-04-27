@@ -1,12 +1,9 @@
 package cmd
 
 import (
-	"os"
-
 	"github.com/erobx/anki_duo/internal/anki"
 	"github.com/erobx/anki_duo/internal/vocab"
 	"github.com/erobx/golingo/duolingo"
-	"github.com/joho/godotenv"
 )
 
 const (
@@ -38,13 +35,6 @@ func (c *Cmdr) ImportVocab(name string) {
 }
 
 func createConn(username, token string) *duolingo.Duolingo {
-	err := godotenv.Load()
-	if err != nil {
-		os.Exit(1)
-	}
-
-	username = os.Getenv("DUO_USERNAME")
-
 	duo := duolingo.NewDuolingo(username, token, baseUrl, abbr)
 	return duo
 }

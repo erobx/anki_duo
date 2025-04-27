@@ -33,7 +33,7 @@ func (vs *VocabState) ReadFile(name string) {
 	vs.extractWords(data)
 }
 
-func (vs *VocabState) DumpVocab(vocab []interface{}, file string) {
+func (vs *VocabState) DumpVocab(vocab []any, file string) {
 	data, err := json.Marshal(vocab)
 	if err != nil {
 		log.Fatal(err)
